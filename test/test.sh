@@ -159,9 +159,13 @@ check_plugin() {
 
 check_plugin "git"
 check_plugin "workflow-aggregator"
+check_plugin "workflow-multibranch"
 check_plugin "blueocean"
 check_plugin "credentials-binding"
 check_plugin "matrix-auth"
+check_plugin "gitlab-plugin"
+check_plugin "dashboard-view"
+check_plugin "cloudbees-folder"
 check_plugin "configuration-as-code"
 
 # Test 4: Jenkins is not in Setup Wizard mode
