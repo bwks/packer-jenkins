@@ -1,6 +1,29 @@
 #!/bin/bash
-# Test script: boots the built Jenkins image in QEMU and validates Jenkins is healthy.
+# Boot the Jenkins image and validate it, or run interactively for manual inspection.
+#
+# Usage:
+#   bash test/test.sh          # automated tests
+#   bash test/test.sh --run    # interactive boot (Ctrl+C to stop)
+#
 set -euo pipefail
+
+if [[ "${1:-}" == "--run" ]]; then
+    IMAGE="$(dirname "$0")/../output/jenkins-base.qcow2"
+    SEED_ISO="/tmp/jenkins-run-seed.iso"
+    RUN_IMAGE="/tmp/jenkins-run.qcow2"
+    cloud-localds "$SEED_ISO" "$(dirname "$0")/user-data" "$(dirname "$0")/meta-data"
+    qemu-img create -f qcow2 -b "$(realpath "$IMAGE")" -F qcow2 "$RUN_IMAGE" 20G
+    echo "Jenkins will be available at http://localhost:18080/ (give it ~60s)"
+    echo "Press Ctrl+C to stop"
+    ACCEL=""; [ -w /dev/kvm ] && ACCEL="-enable-kvm"
+    qemu-system-x86_64 -m 2048 -smp 2 ${ACCEL} -display none \
+        -drive "file=${RUN_IMAGE},format=qcow2,if=virtio" \
+        -drive "file=${SEED_ISO},format=raw,if=virtio" \
+        -netdev "user,id=net0,hostfwd=tcp::12222-:22,hostfwd=tcp::18080-:8080" \
+        -device "virtio-net-pci,netdev=net0" || true
+    rm -f "$RUN_IMAGE" "$SEED_ISO"
+    exit 0
+fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
