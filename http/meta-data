@@ -1,0 +1,2 @@
+instance-id: packer-jenkins-build
+local-hostname: jenkins-build

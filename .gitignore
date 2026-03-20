@@ -14,3 +14,11 @@ crash.log
 
 # For built boxes
 *.box
+
+# Build output
+output/
+
+# VM images and ISOs
+*.qcow2
+*.iso
+*.pid

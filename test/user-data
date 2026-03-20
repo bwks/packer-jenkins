@@ -1,0 +1,16 @@
+#cloud-config
+# Minimal cloud-init config for test boots.
+# Jenkins is pre-installed and enabled; it starts automatically.
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    shell: /bin/bash
+    lock_passwd: false
+
+chpasswd:
+  list: |
+    ubuntu:ubuntu
+  expire: false
+
+ssh_pwauth: true
