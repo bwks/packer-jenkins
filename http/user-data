@@ -1,0 +1,23 @@
+#cloud-config
+# Packer build user - temporary, removed during cleanup
+users:
+  - name: packer
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/packer
+    shell: /bin/bash
+    lock_passwd: false
+
+chpasswd:
+  list: |
+    packer:packer
+  expire: false
+
+ssh_pwauth: true
+
+# Grow the root partition to fill the disk
+growpart:
+  mode: auto
+  devices: ["/"]
+
+resize_rootfs: true
