@@ -98,6 +98,7 @@ echo "==> Installing Jenkins plugins (this may take several minutes)"
 cat > /tmp/plugins.txt << 'PLUGINS_EOF'
 git
 workflow-aggregator
+workflow-multibranch
 pipeline-stage-view
 blueocean
 docker-workflow
@@ -108,6 +109,7 @@ matrix-auth
 role-strategy
 github
 github-branch-source
+gitlab-plugin
 pipeline-github-lib
 timestamper
 ws-cleanup
@@ -120,9 +122,10 @@ ansicolor
 junit
 htmlpublisher
 slack
-sonar
 ansible
 nodejs
+dashboard-view
+cloudbees-folder
 PLUGINS_EOF
 
 java -jar /tmp/jenkins-plugin-manager.jar \

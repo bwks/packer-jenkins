@@ -20,6 +20,7 @@ cloud-init NoCloud.
 |--------|---------|
 | git | Git SCM integration |
 | workflow-aggregator | Pipeline (declarative + scripted) |
+| workflow-multibranch | Multibranch Pipeline jobs |
 | pipeline-stage-view | Pipeline stage visualisation |
 | blueocean | Modern Pipeline UI |
 | docker-workflow | Docker steps in pipelines |
@@ -30,6 +31,7 @@ cloud-init NoCloud.
 | role-strategy | Role-based access control |
 | github | GitHub webhook/status integration |
 | github-branch-source | Multi-branch pipelines from GitHub |
+| gitlab-plugin | GitLab webhook/MR integration |
 | pipeline-github-lib | Shared pipeline libraries from GitHub |
 | timestamper | Timestamps in build logs |
 | ws-cleanup | Workspace cleanup post-build |
@@ -42,9 +44,10 @@ cloud-init NoCloud.
 | junit | JUnit test result publishing |
 | htmlpublisher | Publish HTML reports |
 | slack | Slack notifications |
-| sonar | SonarQube scanner integration |
 | ansible | Ansible playbook build steps |
 | nodejs | Node.js tool installer |
+| dashboard-view | Customisable dashboard with build status widgets |
+| cloudbees-folder | Organise jobs into folders |
 
 ## Requirements
 
